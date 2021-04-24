@@ -1,0 +1,113 @@
+
+<html lang="en">
+
+<head>
+  <title>Glimmer w/ Prism.js</title>
+
+  <meta charset="utf-8">
+  <meta name="description" content="Glimmer syntax highlighting powered by Prism.js" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--
+      This the source of truth for the ember brand variables
+        https://emberjs.com/images/brand/Ember-Brand-Guidelines.pdf
+    -->
+    <style type="text/css">
+      :root {
+        --ember-brand: #E04E39;
+        --ember-black: #212121;
+        --ember-burnt-ember: #9b2918;
+        --ember-gray: #817f7f;
+        --ember-blue: #1e719b;
+        --ember-faint-gray: #efebea;
+        --ember-light-blue: #74b0ce;
+        --ember-linen: #fdf7f6;
+        --ember-yellow: #fbc840;
+        --ember-white: #fdfdfd;
+      }
+    </style>
+
+  <style>
+    @font-face {
+      font-family: dejavu-sans-mono;
+      src: url('./DejaVuSansMono.ttf');
+    }
+
+    html,
+    body {
+      background-color: var(--ember-black);
+      color: white;
+      padding: 0;
+      margin: 0;
+      font-family: system-ui, arial, sans-serif;
+      line-height: 1.35rem;
+    }
+
+    code {
+      font-family: dejavu-sans-mono, ui-monospace, monospace, sans-serif;
+    }
+
+    pre {
+      margin: 0;
+    }
+
+    section {
+      padding: 1rem;
+    }
+
+    section nav {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    a {
+      color: var(--ember-brand);
+    }
+
+    a.active {
+      color: var(--ember-light-blue);
+    }
+  </style>
+
+</head>
+
+<body>
+  <header>
+    <h1>Glimmer Resources (WIP)</h1>
+    <div>
+      <nav>
+        <a href="https://github.com/NullVoxPopuli/prismjs-glimmer">GitHub</a>
+        <a href="https://www.npmjs.com/package/prismjs-glimmer">NPM</a>
+      </nav>
+      <code>npm install prismjs-glimmer</code>
+    </div>
+    <hr />
+  </header>
+  <main>
+    <section>
+      <h2>Highlighting</h2>
+
+      <h3>Editors</h3>
+        <h4>VS Code</h4>
+          https://marketplace.visualstudio.com/items?itemName=lifeart.vscode-glimmer-syntax
+          and
+          https://marketplace.visualstudio.com/items?itemName=chiragpat.vscode-glimmer
+
+        <h4>(neo)vim</h4>
+        <a href="https://github.com/NullVoxPopuli/vim-ember-hbs" target="_blank" rel="nofollow noreferrer">
+          <pre><code>Plug "NullVoxPopuli/vim-ember-hbs"</code></pre>
+        </a>
+        or
+        https://github.com/alexlafroscia/tree-sitter-glimmer
+
+      <h3>HTML</h3>
+
+        <a href="https://hljs-glimmer.nullvoxpopuli.com" target="_blank" rel="nofollow noreferrer">Highlight.JS</a>
+        <a href="https://prismjs-glimmer.nullvoxpopuli.com" target="_blank" rel="nofollow noreferrer">Prism.JS</a>
+
+    </section>
+
+  </main>
+</body>
+
+</html>
