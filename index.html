@@ -195,7 +195,7 @@
     when rendering with JS' Custom Elements
   -->
   <div id="loader">
-    <span>Loading</span>
+    <span>loading</span>
   </div>
   <header>
     <h1>Glimmer Resources</h1>
@@ -358,7 +358,8 @@
      */
     //import { html } from "https://unpkg.com/lit-element/lit-element.js?module";
     // Using a local import is *much* faster than pulling from a CDN, at least for development
-    import { html, render } from './node_modules/lit-html/lit-html.js';
+    // import { html, render } from './node_modules/lit-html/lit-html.js';
+    import { html, render } from 'https://unpkg.com/lit-html/lit-html.js?module';
 
     customElements.define(
       'external-link',
