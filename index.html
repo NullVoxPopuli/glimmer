@@ -358,6 +358,7 @@
      */
     //import { html } from "https://unpkg.com/lit-element/lit-element.js?module";
     // Using a local import is *much* faster than pulling from a CDN, at least for development
+    // Importing from the relative path appears to not work on github-pages
     // import { html, render } from './node_modules/lit-html/lit-html.js';
     import { html, render } from 'https://unpkg.com/lit-html/lit-html.js?module';
 
@@ -395,7 +396,9 @@
     let duration = getComputedStyle(loader).transitionDuration;
 
     let seconds = duration.replaceAll(/[^.\d]+/g, '');
-    let milliseconds = parseInt(seconds, 10) * 1000;
+    let milliseconds = parseFloat(seconds, 10) * 1000;
+
+    loader.style.opacity = 0;
 
     setTimeout(() => {
       loader.parentElement.removeChild(loader);
