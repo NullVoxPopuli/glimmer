@@ -74,6 +74,10 @@
       src: url('./DejaVuSansMono.ttf');
     }
 
+    /**
+     * Chrome does not apply border radius to the outline
+     *
+     */
     *:focus-visible {
       outline-offset: 0.25rem;
       outline-width: 0.125rem;
@@ -100,11 +104,7 @@
       margin: 0;
     }
 
-    h1,
-    h2,
-    h3,
-    h4 {
-      color: var(--horizon-lavender);
+    h1, h2, h3, h4 {
       background: var(--horizon-background);
       font-weight: normal;
       font-style: italic;
@@ -114,6 +114,12 @@
     h2, h3, h4 {
       position: sticky;
       margin-top: 0;
+    }
+
+    h1, h2, h3, h4,
+    h1 a, h2 a, h3 a, h4 a {
+      color: var(--horizon-lavender);
+      text-decoration: none;
     }
 
     h2 {
@@ -153,52 +159,66 @@
     a { color: var(--horizon-tacao); }
     a:hover { color: var(--horizon-apricot); }
     a:active { color: var(--horizon-tertiary-accent); }
+
+    .syntax-info {
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    #loader {
+      opacity: 1;
+      transition: opacity 250ms linear;
+
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 1000;
+
+      background: var(--horizon-background);
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      font-size: 2rem;
+    }
   </style>
 
-  <script type="module">
-    /**
-     *  LitElement only uses shadow dom, which doesn't work with keyboard focus...
-     *  you can disable shadow-dom, but then you don't get slots / children...
-     *
-     *  Native Custom elements are a giant pain -- esp w/r/t lifecycle.
-     *  - when connectedCallback is invoked, the component isn't rendered yet
-     *  - there is no way to have outer-HTML semantics, such as with Glimmer, React, etc
-     *  - It seems the way way to use native custom elements is via the "is" property
-     */
-    // import { html } from "https://unpkg.com/lit-element/lit-element.js?module";
-
-
-    customElements.define(
-      'external-link',
-      class ExternalLink extends HTMLAnchorElement {
-        constructor() {
-          super();
-          this.setAttribute('target', '_blank');
-          this.setAttribute('rel', 'noreferred noopener');
-        }
-      },
-      { extends: 'a' }
-    );
-
-
-  </script>
 </head>
 
 <body class="syntax-dark syntax-normal">
+  <!--
+    covers the screen until JS finishes executing
+    this is to help prevent a flash of unstyled content that occurs
+    when rendering with JS' Custom Elements
+  -->
+  <div id="loader">
+    <span>Loading</span>
+  </div>
   <header>
     <h1>Glimmer Resources</h1>
   </header>
   <main>
     <article>
-      <h2>Highlighting</h2>
+      <h2><heading-link name="Highlighting" /></h2>
 
       <section>
-        <h3>Editors</h3>
+        <h3><heading-link name="Editors" /></h3>
+
         <section>
-          <h4>VS Code</h4>
-          <a is="external-link" href="https://marketplace.visualstudio.com/items?itemName=lifeart.vscode-glimmer-syntax">
+          <h4><heading-link name="VS Code" /></h4>
+
+          <external-link href="https://marketplace.visualstudio.com/items?itemName=lifeart.vscode-glimmer-syntax">
             vscode-glimmer-syntax
-          </a>
+          </external-link>
+          <div class="syntax-info">
+            <p>
+              Provides syntax highlighting for <code>*.hbs</code> files
+            </p>
+          </div>
+
           and
           <a is="external-link" href="https://marketplace.visualstudio.com/items?itemName=chiragpat.vscode-glimmer">
             vscode-glimmer
@@ -211,7 +231,8 @@
         </section>
 
         <section>
-          <h4>(neo)vim</h4>
+          <h4><heading-link name="(neo)vim"/></h4>
+
           <a is="external-link" href="https://github.com/NullVoxPopuli/vim-ember-hbs">
             <pre><code>Plug "NullVoxPopuli/vim-ember-hbs"</code></pre>
           </a>
@@ -230,7 +251,8 @@
       </section>
 
       <section>
-        <h3>HTML</h3>
+        <h3><heading-link name="HTML"/></h3>
+
         <a is="external-link" href="https://hljs-glimmer.nullvoxpopuli.com">Highlight.JS</a>
         <a is="external-link" href="https://prismjs-glimmer.nullvoxpopuli.com">Prism.JS</a>
         <p>pretend there is lots of info already</p>
@@ -254,7 +276,7 @@
       <p>pretend there is lots of info already</p>
     </article>
     <article>
-      <h2>Playground / Demo / Reproductions</h2>
+      <h2><heading-link name="Playground / Demo / Reproductions" /></h2>
 
       <a is="external-link" href="https://glimmerjs.github.io/glimmer-experimental/">
         GlimmerX Playground
@@ -302,6 +324,83 @@
       edit this page
     </a>
   </footer>
+
+
+
+  <script type="module">
+    /**
+     *  LitElement only uses shadow dom, which doesn't work with keyboard focus...
+     *  you can disable shadow-dom, but then you don't get slots / children...
+     *
+     *  Native Custom elements are a giant pain -- esp w/r/t lifecycle.
+     *  - when connectedCallback is invoked, the component isn't rendered yet
+     *  - there is no way to have outer-HTML semantics, such as with Glimmer, React, etc
+     *  - It seems the way to use native custom elements in this way is via the "is" property
+     *  - this problem comes from how CustomElements can't *replace* themselves during render like
+     *    frameworks can
+     *
+     *  LitHTML, on the other hand, is a fancy string builder that happens to have syntax highlighting.
+     *           so... I'll use that.
+     *
+     *  There are tons of browser compatibility issues with Custom elements
+     *  - Firefox supports extending from HTMLAnchorElement but Chrome only allows extending from HTMLElement
+     *  - Chrome doesn't support { extends: 'element-tag' }
+     *
+     *
+     *  Custom elements flash when rendering...
+     *   not good for users
+     *   - known as "FOUC" or "Flash of unstyled content"
+     *   - https://github.com/axa-ch/patterns-library/issues/365
+     *     they're answer is to use "Skeleton views / loaders"... wat
+     *   - this partially has to do with modules blocking script execution
+     *     and why this script tag has moved to the bottom of the body -- so that
+     *     the page can finish rendering first
+     */
+    //import { html } from "https://unpkg.com/lit-element/lit-element.js?module";
+    // Using a local import is *much* faster than pulling from a CDN, at least for development
+    import { html, render } from './node_modules/lit-html/lit-html.js';
+
+    customElements.define(
+      'external-link',
+      class ExternalLink extends HTMLElement {
+        constructor() {
+          super();
+
+          let href = this.getAttribute('href');
+          let template = html`
+            <a href="${href}" target="_blank" rel="noreferrer noopener"> ${this.innerHTML} </a>
+          `;
+
+          render(template, this);
+        }
+      }
+    );
+
+    customElements.define(
+      'heading-link',
+      class HeadingLink extends HTMLElement {
+        constructor() {
+          super();
+
+          let name = this.getAttribute('name');
+          let template = html` <a class="heading-link" name=${name} href="#${name}"> ${name} </a> `;
+
+          render(template, this);
+        }
+      }
+    );
+
+    let loader = document.getElementById('loader');
+    let duration = getComputedStyle(loader).transitionDuration;
+
+    let seconds = duration.replaceAll(/[^.\d]+/g, '');
+    let milliseconds = parseInt(seconds, 10) * 1000;
+
+    setTimeout(() => {
+      loader.parentElement.removeChild(loader);
+    }, milliseconds);
+  </script>
+
 </body>
 
 </html>
