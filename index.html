@@ -1,4 +1,3 @@
-
 <html lang="en">
 
 <head>
@@ -8,24 +7,66 @@
   <meta name="description" content="Glimmer syntax resources" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!--
+  <!--
       This the source of truth for the ember brand variables
         https://emberjs.com/images/brand/Ember-Brand-Guidelines.pdf
     -->
-    <style type="text/css">
-      :root {
-        --ember-brand: #E04E39;
-        --ember-black: #212121;
-        --ember-burnt-ember: #9b2918;
-        --ember-gray: #817f7f;
-        --ember-blue: #1e719b;
-        --ember-faint-gray: #efebea;
-        --ember-light-blue: #74b0ce;
-        --ember-linen: #fdf7f6;
-        --ember-yellow: #fbc840;
-        --ember-white: #fdfdfd;
-      }
-    </style>
+  <style type="text/css">
+    :root {
+      --ember-brand: #E04E39;
+      --ember-black: #212121;
+      --ember-burnt-ember: #9b2918;
+      --ember-gray: #817f7f;
+      --ember-blue: #1e719b;
+      --ember-faint-gray: #efebea;
+      --ember-light-blue: #74b0ce;
+      --ember-linen: #fdf7f6;
+      --ember-yellow: #fbc840;
+      --ember-white: #fdfdfd;
+
+      /* Horizon Theme https://horizontheme.netlify.app/ */
+      /* "Dark" */
+      --horizon-lavender: #B877DB;
+      --horizon-turquoise: #25B2BC;
+      --horizon-cranberry: #E95678;
+      --horizon-apricot: #F09383;
+      --horizon-rosebud: #FAB795;
+      --horizon-tacao: #FAC29A;
+
+      /* "Light" */
+      --horizon-amethyst: #8931B9;
+      --horizon-elm: #1D8991;
+      --horizon-crimson: #DA103F;
+      --horizon-thunderbird: #DC3318;
+      --horizon-tango: #F6661E;
+      --horizon-jaffa: #F77D26;
+    }
+
+    .syntax-dark {
+      --horizon-shadow: #16161C;
+      --horizon-border: #1A1C23;
+      --horizon-background: #1C1E26;
+      --horizon-background-alt: #232530;
+      --horizon-accent: #2E303E;
+      --horizon-accent-alt: #6C6F93;
+      --horizon-accent: #E9436F;
+      --horizon-secondary-accent-alt: #E95379;
+      --horizon-negative: #F43E5C;
+      --horizon-positive: #09F7A0;
+      --horizon-warning: #27D796;
+      --horizon-modifier: #21BFC2;
+      --horizon-tertiary-accent: #FAB28E;
+    }
+
+    .syntax-normal {
+      --horizon-blue: #26BBD9;
+      --horizon-cyan: #59E3E3;
+      --horizon-green: #29D398;
+      --horizon-magenta: #EE64AE;
+      --horizon-red: #E95678;
+      --horizon-yellow: #FAB795;
+    }
+  </style>
 
   <style>
     @font-face {
@@ -33,11 +74,19 @@
       src: url('./DejaVuSansMono.ttf');
     }
 
+    *:focus-visible {
+      outline-offset: 0.25rem;
+      outline-width: 0.125rem;
+      outline-color: var(--horizon-positive);
+      outline-style: solid;
+      border-radius: 0.125rem;
+    }
+
     html,
     body {
-      background-color: var(--ember-black);
+      background-color: var(--horizon-background);
       color: white;
-      padding: 0;
+      padding: 0.51rem;
       margin: 0;
       font-family: system-ui, arial, sans-serif;
       line-height: 1.35rem;
@@ -51,62 +100,208 @@
       margin: 0;
     }
 
+    h1,
+    h2,
+    h3,
+    h4 {
+      color: var(--horizon-lavender);
+      background: var(--horizon-background);
+      font-weight: normal;
+      font-style: italic;
+      width: 100%;
+    }
+
+    h2, h3, h4 {
+      position: sticky;
+      margin-top: 0;
+    }
+
+    h2 {
+      top: 0rem;
+      z-index: 10;
+      padding-top: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    h3 {
+      top: calc(1rem * 2.25);
+      left: 0.25rem;
+      z-index: 9;
+      padding-top: 0.75rem;
+      margin-bottom: 0.75rem;
+    }
+
+    h4 {
+      top: calc(1.25rem * 3.25);
+      left: 0.5rem;
+      z-index: 8;
+      padding-top: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    #edit {
+      position: fixed;
+      bottom: 1rem;
+      right: 1rem;
+    }
+
     section {
-      padding: 1rem;
+      padding: 0.5rem;
     }
 
-    section nav {
-      display: flex;
-      gap: 0.5rem;
-    }
 
-    a {
-      color: var(--ember-brand);
-    }
-
-    a.active {
-      color: var(--ember-light-blue);
-    }
+    a { color: var(--horizon-tacao); }
+    a:hover { color: var(--horizon-apricot); }
+    a:active { color: var(--horizon-tertiary-accent); }
   </style>
 
+  <script type="module">
+    /**
+     *  LitElement only uses shadow dom, which doesn't work with keyboard focus...
+     *  you can disable shadow-dom, but then you don't get slots / children...
+     *
+     *  Native Custom elements are a giant pain -- esp w/r/t lifecycle.
+     *  - when connectedCallback is invoked, the component isn't rendered yet
+     *  - there is no way to have outer-HTML semantics, such as with Glimmer, React, etc
+     *  - It seems the way way to use native custom elements is via the "is" property
+     */
+    // import { html } from "https://unpkg.com/lit-element/lit-element.js?module";
+
+
+    customElements.define(
+      'external-link',
+      class ExternalLink extends HTMLAnchorElement {
+        constructor() {
+          super();
+          this.setAttribute('target', '_blank');
+          this.setAttribute('rel', 'noreferred noopener');
+        }
+      },
+      { extends: 'a' }
+    );
+
+
+  </script>
 </head>
 
-<body>
+<body class="syntax-dark syntax-normal">
   <header>
-    <h1>Glimmer Resources (WIP)</h1>
-    <div>
-      <nav>
-        <a href="https://github.com/NullVoxPopuli/glimmer">GitHub</a>
-      </nav>
-      <code>npm install prismjs-glimmer</code>
-    </div>
-    <hr />
+    <h1>Glimmer Resources</h1>
   </header>
   <main>
-    <section>
+    <article>
       <h2>Highlighting</h2>
 
-      <h3>Editors</h3>
-        <h4>VS Code</h4>
-          https://marketplace.visualstudio.com/items?itemName=lifeart.vscode-glimmer-syntax
+      <section>
+        <h3>Editors</h3>
+        <section>
+          <h4>VS Code</h4>
+          <a is="external-link" href="https://marketplace.visualstudio.com/items?itemName=lifeart.vscode-glimmer-syntax">
+            vscode-glimmer-syntax
+          </a>
           and
-          https://marketplace.visualstudio.com/items?itemName=chiragpat.vscode-glimmer
+          <a is="external-link" href="https://marketplace.visualstudio.com/items?itemName=chiragpat.vscode-glimmer">
+            vscode-glimmer
+          </a>
+          <p>pretend there is lots of info already</p>
+          <p>pretend there is lots of info already</p>
+          <p>pretend there is lots of info already</p>
+          <p>pretend there is lots of info already</p>
+          <p>pretend there is lots of info already</p>
+        </section>
 
-        <h4>(neo)vim</h4>
-        <a href="https://github.com/NullVoxPopuli/vim-ember-hbs" target="_blank" rel="nofollow noreferrer">
-          <pre><code>Plug "NullVoxPopuli/vim-ember-hbs"</code></pre>
-        </a>
-        or
-        https://github.com/alexlafroscia/tree-sitter-glimmer
+        <section>
+          <h4>(neo)vim</h4>
+          <a is="external-link" href="https://github.com/NullVoxPopuli/vim-ember-hbs">
+            <pre><code>Plug "NullVoxPopuli/vim-ember-hbs"</code></pre>
+          </a>
+          a fork of another vim syntax plugin
+          <a is="external-link" href="https://github.com/joukevandermaas/vim-ember-hbs/pull/13">until this PR is merged</a>
+          or
+          <a is="external-link" href="https://github.com/alexlafroscia/tree-sitter-glimmer">
+            tree-sitter-glimmer
+          </a>
+          <p>pretend there is lots of info already</p>
+          <p>pretend there is lots of info already</p>
+          <p>pretend there is lots of info already</p>
+          <p>pretend there is lots of info already</p>
+          <p>pretend there is lots of info already</p>
+        </section>
+      </section>
 
-      <h3>HTML</h3>
+      <section>
+        <h3>HTML</h3>
+        <a is="external-link" href="https://hljs-glimmer.nullvoxpopuli.com">Highlight.JS</a>
+        <a is="external-link" href="https://prismjs-glimmer.nullvoxpopuli.com">Prism.JS</a>
+        <p>pretend there is lots of info already</p>
+        <p>pretend there is lots of info already</p>
+        <p>pretend there is lots of info already</p>
+        <p>pretend there is lots of info already</p>
+        <p>pretend there is lots of info already</p>
+      </section>
 
-        <a href="https://hljs-glimmer.nullvoxpopuli.com" target="_blank" rel="nofollow noreferrer">Highlight.JS</a>
-        <a href="https://prismjs-glimmer.nullvoxpopuli.com" target="_blank" rel="nofollow noreferrer">Prism.JS</a>
+      <p>pretend there is lots of info already</p>
+      <p>pretend there is lots of info already</p>
+      <p>pretend there is lots of info already</p>
+      <p>pretend there is lots of info already</p>
+      <p>pretend there is lots of info already</p>
+      <p>pretend there is lots of info already</p>
+      <p>pretend there is lots of info already</p>
+      <p>pretend there is lots of info already</p>
+      <p>pretend there is lots of info already</p>
+      <p>pretend there is lots of info already</p>
+      <p>pretend there is lots of info already</p>
+      <p>pretend there is lots of info already</p>
+    </article>
+    <article>
+      <h2>Playground / Demo / Reproductions</h2>
 
-    </section>
+      <a is="external-link" href="https://glimmerjs.github.io/glimmer-experimental/">
+        GlimmerX Playground
+      </a>
+
+      <a is="external-link" href="limber.glimdown.com/">
+        Limber: Glimdown Playground
+      </a>
+
+      <a is="external-link" href="https://ember-twiddle.com/">
+        Ember Twiddle
+      </a>
+
+      <a is="external-link" href="https://gitpod.io/#https://github.com/NullVoxPopuli/ember-new-output">
+        GitPod.io
+      </a>
+
+      <p>pretend there is lots of info already</p>
+      <p>pretend there is lots of info already</p>
+      <p>pretend there is lots of info already</p>
+      <p>pretend there is lots of info already</p>
+      <p>pretend there is lots of info already</p>
+      <p>pretend there is lots of info already</p>
+      <p>pretend there is lots of info already</p>
+      <p>pretend there is lots of info already</p>
+      <p>pretend there is lots of info already</p>
+      <p>pretend there is lots of info already</p>
+      <p>pretend there is lots of info already</p>
+      <p>pretend there is lots of info already</p>
+      <p>pretend there is lots of info already</p>
+      <p>pretend there is lots of info already</p>
+      <p>pretend there is lots of info already</p>
+      <p>pretend there is lots of info already</p>
+      <p>pretend there is lots of info already</p>
+      <p>pretend there is lots of info already</p>
+      <p>pretend there is lots of info already</p>
+      <p>pretend there is lots of info already</p>
+      <p>pretend there is lots of info already</p>
+      <p>pretend there is lots of info already</p>
+    </article>
 
   </main>
+  <footer>
+    <a is="external-link" id="edit" href="https://github.com/NullVoxPopuli/glimmer/edit/main/index.html">
+      edit this page
+    </a>
+  </footer>
 </body>
 
 </html>
