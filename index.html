@@ -185,6 +185,8 @@
 
     section {
       padding: 0.5rem;
+      display: grid;
+      gap: 0.5rem;
     }
 
     p.summary {
@@ -200,10 +202,13 @@
     a:active { color: var(--horizon-tertiary-accent); }
 
     .plugin-info {
-      margin-top: 2rem;
       display: grid;
       gap: 1rem;
       grid-auto-flow: row;
+
+      border: 1px solid var(--ember-gray);
+      border-radius: 0.5rem;
+      padding: 0.5rem;
     }
     .plugin-info header {
       text-align: center;
@@ -437,12 +442,12 @@
             to get the maximum support
           </p>
 
+          <header class="plugin">
+            <span><span class="sr-only">plugin name and description</span></span>
+            <span>basic highlighting</span>
+            <span>embedded support</span>
+          </header>
           <div class="plugin-info">
-            <header class="plugin">
-              <span><span class="sr-only">plugin name and description</span></span>
-              <span>basic highlighting</span>
-              <span>embedded support</span>
-            </header>
 
             <external-link href="https://github.com/NullVoxPopuli/vim-ember-hbs">
               NullVoxPopuli/vim-ember-hbs
@@ -486,19 +491,18 @@
                 <li class="no">does not support <code>hbs</code> tags in Markdown</li>
               </ul>
             </div>
+
+            <span>
+              If you wish to use <em>vim-ember-hbs</em>, to get embedded support, you'll need to:</span>
+              <pre><code>Plug 'NullVoxPopuli/vim-ember-hbs'
+  Plug 'Quramy/vim-js-pretty-template'
+  Plug 'plasticboy/vim-markdown'
+
+  let g:vim_markdown_fenced_languages = ['js=javascript', 'ts=typescript', 'hbs=handlebars']
+
+  call jspretmpl#register_tag('hbs', 'handlebars')</code></pre>
           </div>
 
-          <p>
-            If you wish to use <em>vim-ember-hbs</em>, to get embedded support, you'll need to:
-            <pre><code>Plug 'NullVoxPopuli/vim-ember-hbs'
-Plug 'Quramy/vim-js-pretty-template'
-Plug 'plasticboy/vim-markdown'
-
-let g:vim_markdown_fenced_languages = ['js=javascript', 'ts=typescript', 'hbs=handlebars']
-
-call jspretmpl#register_tag('hbs', 'handlebars')
-            </code></pre>
-          </p>
         </section>
       </section>
 
