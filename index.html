@@ -7,6 +7,7 @@
   <meta charset="utf-8">
   <meta name="description" content="Glimmer syntax resources" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="https://emberjs.com/images/favicon.png" />
 
   <!--
       This the source of truth for the ember brand variables
@@ -92,11 +93,9 @@
      *
      */
     *:focus-visible {
-      outline-offset: 0.25rem;
-      outline-width: 0.125rem;
-      outline-color: var(--horizon-positive);
-      outline-style: solid;
+      outline: none;
       border-radius: 0.125rem;
+      box-shadow: var(--horizon-background) 0px 0px 0px 3px, var(--ember-brand) 0px 0px 0px 6px, var(--ember-burnt-ember) 0px 2px 2px 7px
     }
 
     html,
@@ -107,6 +106,8 @@
       margin: 0;
       font-family: system-ui, arial, sans-serif;
       line-height: 1.35rem;
+      display: grid;
+      gap: 1rem;
     }
 
     code {
@@ -282,7 +283,19 @@
     <p>
       <kbd>ctrl</kbd><span class="sep">+</span><kbd>f</kbd> to search
     </p>
+    <nav>
+      Skip to: <br>
+      <ul>
+        <li>
+          <a href="#Playground / Demo / Reproductions">Online REPL / Playgrounds</a>
+        </li>
+        <li>
+          <a href="#Highlighting">Highlighting</a> ⇒ <a href="#VS Code">VS Code</a> &nbsp;|&nbsp; <a href="#(neo)vim">(neo)vim</a> &nbsp;|&nbsp;  <a href="#HTML & Snippets">HTML & Snippets</a>
+        </li>
+      </ul>
+    </nav>
   </header>
+
   <main>
     <article>
       <h2><heading-link name="Playground / Demo / Reproductions" /></h2>
@@ -296,7 +309,7 @@
         <dd>
           The official app from the folks working on and experimenting with the future of Glimmer
         </dd>
-        
+
         <dt>
           <external-link href="https://stackblitz.com/github/ember-cli/ember-new-output">
             `ember new` app output on StackBlitz
@@ -336,14 +349,14 @@
         <dd>
           A popular tool for creating Ember demos and reproductions
         </dd>
-        
+
         <dt>
           <external-link href="https://glitch.com/~emberjs">
-            Glitch  
+            Glitch
           </external-link>
         </dt>
         <dd>
-           Template tracking the latest EmberJS 
+           Template tracking the latest EmberJS
         </dd>
 
         <dt>
@@ -357,6 +370,8 @@
       </dl>
 
     </article>
+
+    <hr>
 
     <article>
       <h2><heading-link name="Highlighting" /></h2>
