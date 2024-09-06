@@ -1,77 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <title>Glimmer, the language of Ember</title>
 
-<head>
-  <title>Glimmer, the language of Ember</title>
+    <meta charset="utf-8" />
+    <meta name="description" content="Glimmer syntax resources" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="shortcut icon" href="https://emberjs.com/images/favicon.png" />
 
-  <meta charset="utf-8">
-  <meta name="description" content="Glimmer syntax resources" />
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="shortcut icon" href="https://emberjs.com/images/favicon.png" />
-
-  <!--
+    <!--
       This the source of truth for the ember brand variables
         https://emberjs.com/images/brand/Ember-Brand-Guidelines.pdf
     -->
-  <style type="text/css">
-    :root {
-      --ember-brand: #E04E39;
-      --ember-black: #212121;
-      --ember-burnt-ember: #9b2918;
-      --ember-gray: #817f7f;
-      --ember-blue: #1e719b;
-      --ember-faint-gray: #efebea;
-      --ember-light-blue: #74b0ce;
-      --ember-linen: #fdf7f6;
-      --ember-yellow: #fbc840;
-      --ember-white: #fdfdfd;
+    <style type="text/css">
+      :root {
+        --ember-brand: #e04e39;
+        --ember-black: #212121;
+        --ember-burnt-ember: #9b2918;
+        --ember-gray: #817f7f;
+        --ember-blue: #1e719b;
+        --ember-faint-gray: #efebea;
+        --ember-light-blue: #74b0ce;
+        --ember-linen: #fdf7f6;
+        --ember-yellow: #fbc840;
+        --ember-white: #fdfdfd;
 
-      /* Horizon Theme https://horizontheme.netlify.app/ */
-      /* "Dark" */
-      --horizon-lavender: #B877DB;
-      --horizon-turquoise: #25B2BC;
-      --horizon-cranberry: #E95678;
-      --horizon-apricot: #F09383;
-      --horizon-rosebud: #FAB795;
-      --horizon-tacao: #FAC29A;
+        /* Horizon Theme https://horizontheme.netlify.app/ */
+        /* "Dark" */
+        --horizon-lavender: #b877db;
+        --horizon-turquoise: #25b2bc;
+        --horizon-cranberry: #e95678;
+        --horizon-apricot: #f09383;
+        --horizon-rosebud: #fab795;
+        --horizon-tacao: #fac29a;
 
-      /* "Light" */
-      --horizon-amethyst: #8931B9;
-      --horizon-elm: #1D8991;
-      --horizon-crimson: #DA103F;
-      --horizon-thunderbird: #DC3318;
-      --horizon-tango: #F6661E;
-      --horizon-jaffa: #F77D26;
-    }
+        /* "Light" */
+        --horizon-amethyst: #8931b9;
+        --horizon-elm: #1d8991;
+        --horizon-crimson: #da103f;
+        --horizon-thunderbird: #dc3318;
+        --horizon-tango: #f6661e;
+        --horizon-jaffa: #f77d26;
+      }
 
-    .syntax-dark {
-      --horizon-shadow: #16161C;
-      --horizon-border: #1A1C23;
-      --horizon-background: #1C1E26;
-      --horizon-background-alt: #232530;
-      --horizon-accent: #2E303E;
-      --horizon-accent-alt: #6C6F93;
-      --horizon-accent: #E9436F;
-      --horizon-secondary-accent-alt: #E95379;
-      --horizon-negative: #F43E5C;
-      --horizon-positive: #09F7A0;
-      --horizon-warning: #27D796;
-      --horizon-modifier: #21BFC2;
-      --horizon-tertiary-accent: #FAB28E;
-    }
+      .syntax-dark {
+        --horizon-shadow: #16161c;
+        --horizon-border: #1a1c23;
+        --horizon-background: #1c1e26;
+        --horizon-background-alt: #232530;
+        --horizon-accent: #2e303e;
+        --horizon-accent-alt: #6c6f93;
+        --horizon-accent: #e9436f;
+        --horizon-secondary-accent-alt: #e95379;
+        --horizon-negative: #f43e5c;
+        --horizon-positive: #09f7a0;
+        --horizon-warning: #27d796;
+        --horizon-modifier: #21bfc2;
+        --horizon-tertiary-accent: #fab28e;
+      }
 
-    .syntax-normal {
-      --horizon-blue: #26BBD9;
-      --horizon-cyan: #59E3E3;
-      --horizon-green: #29D398;
-      --horizon-magenta: #EE64AE;
-      --horizon-red: #E95678;
-      --horizon-yellow: #FAB795;
-    }
-  </style>
+      .syntax-normal {
+        --horizon-blue: #26bbd9;
+        --horizon-cyan: #59e3e3;
+        --horizon-green: #29d398;
+        --horizon-magenta: #ee64ae;
+        --horizon-red: #e95678;
+        --horizon-yellow: #fab795;
+      }
+    </style>
 
-  <style>
-    /**
+    <style>
+      /**
       * NOTE: a lot of things in here are not great and go against
       *       my philosophy of "elements should not layout themselves,
       *       only the container element should be responsible for positioning
@@ -83,255 +82,283 @@
       *       out in the world, ya know?
       *
       */
-    @font-face {
-      font-family: dejavu-sans-mono;
-      src: url('./DejaVuSansMono.ttf');
-    }
+      @font-face {
+        font-family: dejavu-sans-mono;
+        src: url("./DejaVuSansMono.ttf");
+      }
 
-    /**
+      /**
      * Chrome does not apply border radius to the outline
      *
      */
-    *:focus-visible {
-      outline: none;
-      border-radius: 0.125rem;
-      box-shadow: var(--horizon-background) 0px 0px 0px 3px, var(--ember-brand) 0px 0px 0px 6px, var(--ember-burnt-ember) 0px 2px 2px 7px
-    }
+      *:focus-visible {
+        outline: none;
+        border-radius: 0.125rem;
+        box-shadow: var(--horizon-background) 0px 0px 0px 3px,
+          var(--ember-brand) 0px 0px 0px 6px,
+          var(--ember-burnt-ember) 0px 2px 2px 7px;
+      }
 
-    html,
-    body {
-      background-color: var(--horizon-background);
-      color: white;
-      padding: 0.51rem;
-      margin: 0;
-      font-family: system-ui, arial, sans-serif;
-      line-height: 1.35rem;
-      display: grid;
-      gap: 1rem;
-    }
+      html,
+      body {
+        background-color: var(--horizon-background);
+        color: white;
+        padding: 0.51rem;
+        margin: 0;
+        font-family: system-ui, arial, sans-serif;
+        line-height: 1.35rem;
+        display: grid;
+        gap: 1rem;
+      }
 
-    code {
-      font-family: dejavu-sans-mono, ui-monospace, monospace, sans-serif;
-      color: var(--horizon-modifier);
-    }
+      code {
+        font-family: dejavu-sans-mono, ui-monospace, monospace, sans-serif;
+        color: var(--horizon-modifier);
+      }
 
-    kbd {
-      background-color: var(--horizon-background-alt);
-      padding: 2px 0.5rem;
-      box-shadow: 0 1px 0px 1px var(--horizon-accent-alt);
-      font-size: 1rem;
-      text-transform: uppercase;
-    }
-    kbd + .sep {
-      margin: 0 0.5rem;
-    }
+      kbd {
+        background-color: var(--horizon-background-alt);
+        padding: 2px 0.5rem;
+        box-shadow: 0 1px 0px 1px var(--horizon-accent-alt);
+        font-size: 1rem;
+        text-transform: uppercase;
+      }
+      kbd + .sep {
+        margin: 0 0.5rem;
+      }
 
-    pre {
-      margin: 0;
-      overflow: auto;
-    }
+      pre {
+        margin: 0;
+        overflow: auto;
+      }
 
-    h1, h2, h3, h4 {
-      background: var(--horizon-background);
-      font-weight: normal;
-      font-style: italic;
-      width: 100%;
-    }
+      h1,
+      h2,
+      h3,
+      h4 {
+        background: var(--horizon-background);
+        font-weight: normal;
+        font-style: italic;
+        width: 100%;
+      }
 
-    h2, h3, h4 {
-      position: sticky;
-      margin-top: 0;
-    }
+      h2,
+      h3,
+      h4 {
+        position: sticky;
+        margin-top: 0;
+      }
 
-    h1, h2, h3, h4,
-    h1 a, h2 a, h3 a, h4 a {
-      color: var(--horizon-lavender);
-      text-decoration: none;
-    }
+      h1,
+      h2,
+      h3,
+      h4,
+      h1 a,
+      h2 a,
+      h3 a,
+      h4 a {
+        color: var(--horizon-lavender);
+        text-decoration: none;
+      }
 
-    h2 {
-      top: 0rem;
-      z-index: 10;
-      padding-top: 1rem;
-      margin-bottom: 1rem;
-    }
+      h2 {
+        top: 0rem;
+        z-index: 10;
+        padding-top: 1rem;
+        margin-bottom: 1rem;
+      }
 
-    h3 {
-      top: calc(1rem * 2.25);
-      left: 0.25rem;
-      z-index: 9;
-      padding-top: 0.75rem;
-      margin-bottom: 0.75rem;
-    }
+      h3 {
+        top: calc(1rem * 2.25);
+        left: 0.25rem;
+        z-index: 9;
+        padding-top: 0.75rem;
+        margin-bottom: 0.75rem;
+      }
 
-    h4 {
-      top: calc(1.25rem * 3.25);
-      left: 0.5rem;
-      z-index: 8;
-      padding-top: 0.5rem;
-      margin-bottom: 0.5rem;
-    }
+      h4 {
+        top: calc(1.25rem * 3.25);
+        left: 0.5rem;
+        z-index: 8;
+        padding-top: 0.5rem;
+        margin-bottom: 0.5rem;
+      }
 
-    #edit {
-      position: fixed;
-      bottom: 1rem;
-      right: 1rem;
-    }
+      #edit {
+        position: fixed;
+        bottom: 1rem;
+        right: 1rem;
+      }
 
-    main {
-      /* full width @ 720p */
-      max-width: 80rem;
-    }
+      main {
+        /* full width @ 720p */
+        max-width: 80rem;
+      }
 
-    section {
-      padding: 0.5rem;
-      display: grid;
-      gap: 0.5rem;
-    }
+      section {
+        padding: 0.5rem;
+        display: grid;
+        gap: 0.5rem;
+      }
 
-    p.summary {
-      color: var(--ember-faint-gray);
-      font-size: 0.9rem;
-      font-style: italic;
-      padding-left: 0.5rem;
-    }
+      p.summary {
+        color: var(--ember-faint-gray);
+        font-size: 0.9rem;
+        font-style: italic;
+        padding-left: 0.5rem;
+      }
 
+      a {
+        color: var(--horizon-tacao);
+      }
+      a:hover {
+        color: var(--horizon-apricot);
+      }
+      a:active {
+        color: var(--horizon-tertiary-accent);
+      }
 
-    a { color: var(--horizon-tacao); }
-    a:hover { color: var(--horizon-apricot); }
-    a:active { color: var(--horizon-tertiary-accent); }
+      .plugin-info {
+        display: grid;
+        gap: 1rem;
+        grid-auto-flow: row;
 
-    .plugin-info {
-      display: grid;
-      gap: 1rem;
-      grid-auto-flow: row;
+        border: 1px solid var(--ember-gray);
+        border-radius: 0.5rem;
+        padding: 0.5rem;
+      }
+      .plugin-info header {
+        text-align: center;
+      }
 
-      border: 1px solid var(--ember-gray);
-      border-radius: 0.5rem;
-      padding: 0.5rem;
-    }
-    .plugin-info header {
-      text-align: center;
-    }
+      .plugin-info .plugin,
+      header.plugin {
+        display: grid;
+        gap: 1rem;
+        grid-template-columns: 5fr 3fr 4fr;
+      }
 
-    .plugin-info .plugin, header.plugin {
-      display: grid;
-      gap: 1rem;
-      grid-template-columns: 5fr 3fr 4fr;
-    }
+      #loader {
+        opacity: 1;
+        transition: opacity 100ms linear;
 
-    #loader {
-      opacity: 1;
-      transition: opacity 250ms linear;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 1000;
 
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      z-index: 1000;
+        background: var(--horizon-background);
 
-      background: var(--horizon-background);
+        display: flex;
+        justify-content: center;
+        align-items: center;
 
-      display: flex;
-      justify-content: center;
-      align-items: center;
+        font-size: 2rem;
+      }
 
-      font-size: 2rem;
-    }
+      .sr-only {
+        position: absolute;
+        left: -100px;
+        top: auto;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+      }
 
-    .sr-only {
-      position: absolute;
-      left: -100px;
-      top: auto;
-      width: 1px;
-      height: 1px;
-      overflow: hidden;
-    }
+      ul.features {
+        list-style: none;
+      }
+      li.yes:before,
+      li.no:before {
+        content: "✔️";
+        /* default ul margin is 40px */
+        margin-left: -30px;
+        margin-right: 0.5rem;
+        list-style: none;
+      }
+      li.no:before {
+        content: "❌";
+      }
 
-    ul.features {
-      list-style: none;
-    }
-    li.yes:before,
-    li.no:before {
-      content: '✔️';
-      /* default ul margin is 40px */
-      margin-left: -30px;
-      margin-right: 0.5rem;
-      list-style: none;
-    }
-    li.no:before {
-      content: '❌';
-    }
+      dt + dd {
+        margin-bottom: 1rem;
+      }
+      dt {
+        margin-bottom: 0.5rem;
+      }
+    </style>
+  </head>
 
-    dt + dd {
-      margin-bottom: 1rem;
-    }
-    dt {
-      margin-bottom: 0.5rem;
-    }
-  </style>
-
-</head>
-
-<body class="syntax-dark syntax-normal">
-  <!--
+  <body class="syntax-dark syntax-normal">
+    <!--
     covers the screen until JS finishes executing
     this is to help prevent a flash of unstyled content that occurs
     when rendering with JS' Custom Elements
   -->
-  <div id="loader">
-    <span>loading</span>
-  </div>
-  <header>
-    <h1>Glimmer Resources</h1>
-    <p>
-      <kbd>ctrl</kbd><span class="sep">+</span><kbd>f</kbd> to search
-    </p>
-    <nav>
-      Skip to: <br>
-      <ul>
-        <li>
-          <a href="#Playground / Demo / Reproductions">Online REPL / Playgrounds</a>
-        </li>
-        <li>
-          <a href="#Highlighting">Highlighting</a> ⇒ <a href="#VS Code">VS Code</a> &nbsp;|&nbsp; <a href="#(neo)vim">(neo)vim</a> &nbsp;|&nbsp;  <a href="#HTML & Snippets">HTML & Snippets</a>
-        </li>
-      </ul>
-    </nav>
-  </header>
+    <div id="loader">
+      <span>loading</span>
+    </div>
+    <header>
+      <h1>Glimmer Resources</h1>
+      <p><kbd>ctrl</kbd><span class="sep">+</span><kbd>f</kbd> to search</p>
+      <nav>
+        Skip to: <br />
+        <ul>
+          <li>
+            <a href="#Playground / Demo / Reproductions"
+              >Online REPL / Playgrounds</a
+            >
+          </li>
+          <li>
+            <a href="#Highlighting">Highlighting</a> ⇒
+            <a href="#VS Code">VS Code</a> &nbsp;|&nbsp;
+            <a href="#(neo)vim">(neo)vim</a> &nbsp;|&nbsp;
+            <a href="#HTML & Snippets">HTML & Snippets</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
 
-  <main>
-    <article>
-      <h2><heading-link name="Playground / Demo / Reproductions" /></h2>
+    <main>
+      <article>
+        <h2><heading-link name="Playground / Demo / Reproductions" /></h2>
 
-      <dl>
-        <dt>
-          <external-link href="https://glimmerjs.github.io/glimmer-experimental/">
-            GlimmerX Playground
-          </external-link>
-        </dt>
-        <dd>
-          The official app from the folks working on and experimenting with the future of Glimmer
-        </dd>
+        <dl>
+          <dt>
+            <external-link
+              href="https://glimmerjs.github.io/glimmer-experimental/"
+            >
+              GlimmerX Playground
+            </external-link>
+          </dt>
+          <dd>
+            The official app from the folks working on and experimenting with
+            the future of Glimmer
+          </dd>
 
-        <dt>
-          <external-link href="https://stackblitz.com/github/ember-cli/ember-new-output">
-            `ember new` app output on StackBlitz
-          </external-link>
-        </dt>
-        <dd>
-          Always up to date ember playground that uses the real ember-cli in a WebContainer.
-        </dd>
+          <dt>
+            <external-link
+              href="https://stackblitz.com/github/ember-cli/ember-new-output"
+            >
+              `ember new` app output on StackBlitz
+            </external-link>
+          </dt>
+          <dd>
+            Always up to date ember playground that uses the real ember-cli in a
+            WebContainer.
+          </dd>
 
-        <dt>
-          <external-link href="https://limber.glimdown.com/">
-            Limber: Glimdown Playground
-          </external-link>
-        </dt>
-        <dd>
-          A demonstration of combining markdown with glimmer syntax for authoring live documentation. <br>
-          Related projects:
+          <dt>
+            <external-link href="https://limber.glimdown.com/">
+              Limber: Glimdown Playground
+            </external-link>
+          </dt>
+          <dd>
+            A demonstration of combining markdown with glimmer syntax for
+            authoring live documentation. <br />
+            Related projects:
             <ul>
               <li>
                 <external-link href="https://field-guide.netlify.app/">
@@ -339,161 +366,214 @@
                 </external-link>
               </li>
               <li>
-                <external-link href="https://docfy.dev/">
-                  Docfy
-                </external-link>
+                <external-link href="https://docfy.dev/"> Docfy </external-link>
               </li>
             </ul>
-        </dd>
+          </dd>
 
-        <dt>
-          <external-link href="https://ember-twiddle.com/">
-            Ember Twiddle
-          </external-link>
-        </dt>
-        <dd>
-          A popular tool for creating Ember demos and reproductions
-        </dd>
+          <dt>
+            <external-link href="https://ember-twiddle.com/">
+              Ember Twiddle
+            </external-link>
+          </dt>
+          <dd>A popular tool for creating Ember demos and reproductions</dd>
 
-        <dt>
-          <external-link href="https://glitch.com/~emberjs">
-            Glitch
-          </external-link>
-        </dt>
-        <dd>
-           Template tracking the latest EmberJS
-        </dd>
+          <dt>
+            <external-link href="https://glitch.com/~emberjs">
+              Glitch
+            </external-link>
+          </dt>
+          <dd>Template tracking the latest EmberJS</dd>
 
-        <dt>
-          <external-link href="https://gitpod.io/#https://github.com/NullVoxPopuli/ember-new-output">
-            GitPod.io
-          </external-link>
-        </dt>
-        <dd>
-           A high-fidelity node environment for playing around with ember without needing to downloading yourself or for creating issue reproductions
-        </dd>
-      </dl>
+          <dt>
+            <external-link
+              href="https://gitpod.io/#https://github.com/NullVoxPopuli/ember-new-output"
+            >
+              GitPod.io
+            </external-link>
+          </dt>
+          <dd>
+            A high-fidelity node environment for playing around with ember
+            without needing to downloading yourself or for creating issue
+            reproductions
+          </dd>
+        </dl>
+      </article>
 
-    </article>
+      <hr />
 
-    <hr>
-
-    <article>
-      <h2><heading-link name="Highlighting" /></h2>
-
-      <section>
-        <h3><heading-link name="Editors" /></h3>
+      <article>
+        <h2><heading-link name="Highlighting" /></h2>
 
         <section>
-          <h4><heading-link name="VS Code" /></h4>
+          <h3><heading-link name="Editors" /></h3>
 
-          <p class="summary">
-            VS Code requires two plugins to have full syntax highlighting
-          </p>
+          <section>
+            <h4><heading-link name="VS Code" /></h4>
 
-          <header class="plugin">
-            <span><span class="sr-only">plugin name and description</span></span>
-            <span>basic highlighting</span>
-            <span>embedded support</span>
-          </header>
-          <div class="plugin-info">
+            <p class="summary">
+              VS Code requires two plugins to have full syntax highlighting
+            </p>
 
-            <external-link href="https://marketplace.visualstudio.com/items?itemName=lifeart.vscode-glimmer-syntax">
-              vscode-glimmer-syntax
-            </external-link>
+            <header class="plugin">
+              <span
+                ><span class="sr-only">plugin name and description</span></span
+              >
+              <span>basic highlighting</span>
+              <span>embedded support</span>
+            </header>
+            <div class="plugin-info">
+              <external-link
+                href="https://marketplace.visualstudio.com/items?itemName=lifeart.vscode-glimmer-syntax"
+              >
+                vscode-glimmer-syntax
+              </external-link>
 
-            <div class="plugin">
-              <span>Provides syntax highlighting for <code>*.hbs</code> files</span>
+              <div class="plugin">
+                <span
+                  >Provides syntax highlighting for
+                  <code>*.hbs</code> files</span
+                >
 
-              <ul class="features">
-                <li class="yes" title="this plugin provides highlighting for glimmer"></li>
-              </ul>
-              <ul class="features">
-                <li class="no" title="this plugin will not highlight glimmer in embedded situations"></li>
-              </ul>
+                <ul class="features">
+                  <li
+                    class="yes"
+                    title="this plugin provides highlighting for glimmer"
+                  ></li>
+                </ul>
+                <ul class="features">
+                  <li
+                    class="no"
+                    title="this plugin will not highlight glimmer in embedded situations"
+                  ></li>
+                </ul>
+              </div>
             </div>
-          </div>
 
-          <div class="plugin-info">
-            <external-link href="https://marketplace.visualstudio.com/items?itemName=chiragpat.vscode-glimmer">
-              vscode-glimmer
-            </external-link>
+            <div class="plugin-info">
+              <external-link
+                href="https://marketplace.visualstudio.com/items?itemName=chiragpat.vscode-glimmer"
+              >
+                vscode-glimmer
+              </external-link>
 
-            <div class="plugin">
-              <span>Provides embedded highlighting support for vscode-glimmer-syntax</span>
+              <div class="plugin">
+                <span
+                  >Provides embedded highlighting support for
+                  vscode-glimmer-syntax</span
+                >
 
-              <ul class="features">
-                <li class="no" title="this plugin cannot be used standalone"></li>
-              </ul>
-              <ul class="features">
-                <li class="yes">supports <code>hbs``</code> template literals in JS & TS</li>
-                <li class="yes">supports <code>&lt;template&gt</code> tags in JS & TS</li>
-                <li class="yes">supports <code>hbs</code> tags in Markdown</li>
-              </ul>
+                <ul class="features">
+                  <li
+                    class="no"
+                    title="this plugin cannot be used standalone"
+                  ></li>
+                </ul>
+                <ul class="features">
+                  <li class="yes">
+                    supports <code>hbs``</code> template literals in JS & TS
+                  </li>
+                  <li class="yes">
+                    supports <code>&lt;template&gt</code> tags in JS & TS
+                  </li>
+                  <li class="yes">
+                    supports <code>hbs</code> tags in Markdown
+                  </li>
+                </ul>
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
 
-        <section>
-          <h4><heading-link name="(neo)vim"/></h4>
+          <section>
+            <h4><heading-link name="(neo)vim" /></h4>
 
-          <p class="summary">
-            (neo)vim has a couple alternatives to highlighting, but requires some configuration
-            to get the maximum support
-          </p>
+            <p class="summary">
+              (neo)vim has a couple alternatives to highlighting, but requires
+              some configuration to get the maximum support
+            </p>
 
-          <header class="plugin">
-            <span><span class="sr-only">plugin name and description</span></span>
-            <span>basic highlighting</span>
-            <span>embedded support</span>
-          </header>
-          <div class="plugin-info">
+            <header class="plugin">
+              <span
+                ><span class="sr-only">plugin name and description</span></span
+              >
+              <span>basic highlighting</span>
+              <span>embedded support</span>
+            </header>
+            <div class="plugin-info">
+              <external-link
+                href="https://github.com/NullVoxPopuli/vim-ember-hbs"
+              >
+                NullVoxPopuli/vim-ember-hbs
+              </external-link>
 
-            <external-link href="https://github.com/NullVoxPopuli/vim-ember-hbs">
-              NullVoxPopuli/vim-ember-hbs
-            </external-link>
+              <div class="plugin">
+                <span>
+                  traditional vim syntax definition -- a fork of another vim
+                  syntax plugin
+                  <external-link
+                    href="https://github.com/joukevandermaas/vim-ember-hbs/pull/13"
+                    >until this PR is merged</external-link
+                  >
+                </span>
 
-            <div class="plugin">
+                <ul class="features">
+                  <li
+                    class="yes"
+                    title="this plugin provides highlighting for glimmer"
+                  ></li>
+                </ul>
+                <ul class="features">
+                  <li
+                    class="no"
+                    title="this plugin will not highlight glimmer in embedded situations"
+                  ></li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="plugin-info">
+              <external-link
+                href="https://github.com/alexlafroscia/tree-sitter-glimmer"
+              >
+                tree-sitter-glimmer
+              </external-link>
+
+              <div class="plugin">
+                <span>
+                  <em>for neovim only</em> -- provides high-fidelity syntax
+                  highlighting.<br />
+                  can be used instead of vim-ember-hbs
+                </span>
+
+                <ul class="features">
+                  <li
+                    class="yes"
+                    title="this plugin provides highlighting for glimmer"
+                  >
+                    requires
+                    <external-link
+                      href="https://github.com/nvim-treesitter/nvim-treesitter"
+                      >nvim-treesitter</external-link
+                    >
+                  </li>
+                </ul>
+                <ul class="features">
+                  <li class="yes">
+                    supports <code>hbs``</code> template literals in JS & TS
+                  </li>
+                  <li class="yes">
+                    supports <code>&lt;template&gt</code> tags in JS & TS
+                  </li>
+                  <li class="no">
+                    does not support <code>hbs</code> tags in Markdown
+                  </li>
+                </ul>
+              </div>
+
               <span>
-                traditional vim syntax definition -- a fork of another vim syntax plugin
-                <external-link href="https://github.com/joukevandermaas/vim-ember-hbs/pull/13">until this PR is merged</external-link>
-              </span>
-
-              <ul class="features">
-                <li class="yes" title="this plugin provides highlighting for glimmer"></li>
-              </ul>
-              <ul class="features">
-                <li class="no" title="this plugin will not highlight glimmer in embedded situations"></li>
-              </ul>
-            </div>
-          </div>
-
-          <div class="plugin-info">
-            <external-link href="https://github.com/alexlafroscia/tree-sitter-glimmer">
-              tree-sitter-glimmer
-            </external-link>
-
-            <div class="plugin">
-              <span>
-                <em>for neovim only</em> -- provides high-fidelity syntax highlighting.<br>
-                can be used instead of vim-ember-hbs
-              </span>
-
-              <ul class="features">
-                <li class="yes" title="this plugin provides highlighting for glimmer">
-                  requires
-                  <external-link href="https://github.com/nvim-treesitter/nvim-treesitter">nvim-treesitter</external-link>
-                </li>
-              </ul>
-              <ul class="features">
-                <li class="yes">supports <code>hbs``</code> template literals in JS & TS</li>
-                <li class="yes">supports <code>&lt;template&gt</code> tags in JS & TS</li>
-                <li class="no">does not support <code>hbs</code> tags in Markdown</li>
-              </ul>
-            </div>
-
-            <span>
-              If you wish to use <em>vim-ember-hbs</em>, to get embedded support, you'll need to:</span>
+                If you wish to use <em>vim-ember-hbs</em>, to get embedded
+                support, you'll need to:</span
+              >
               <pre><code>Plug 'NullVoxPopuli/vim-ember-hbs'
   Plug 'Quramy/vim-js-pretty-template'
   Plug 'plasticboy/vim-markdown'
@@ -501,162 +581,195 @@
   let g:vim_markdown_fenced_languages = ['js=javascript', 'ts=typescript', 'hbs=handlebars']
 
   call jspretmpl#register_tag('hbs', 'handlebars')</code></pre>
-          </div>
-
+            </div>
+          </section>
         </section>
-      </section>
 
-      <section>
-        <h3><heading-link name="HTML & Snippets"/></h3>
-
-
+        <section>
+          <h3><heading-link name="HTML & Snippets" /></h3>
 
           <p class="summary">
             Typically, you'd only want one of these in your projects.
-            Highlight.JS has more active development and is generally more modern.
+            Highlight.JS has more active development and is generally more
+            modern.
           </p>
 
           <div class="plugin-info">
             <header class="plugin">
-              <span><span class="sr-only">plugin name and description</span></span>
+              <span
+                ><span class="sr-only">plugin name and description</span></span
+              >
               <span>basic highlighting</span>
               <span>embedded support</span>
             </header>
 
-            <external-link href="https://hljs-glimmer.nullvoxpopuli.com">highlightjs-glimmer</external-link>
+            <external-link href="https://hljs-glimmer.nullvoxpopuli.com"
+              >highlightjs-glimmer</external-link
+            >
 
             <div class="plugin">
               <span>
                 third-party plugin for
-                <external-link href="https://github.com/highlightjs/highlight.js">Highlight.JS</external-link>
+                <external-link
+                  href="https://github.com/highlightjs/highlight.js"
+                  >Highlight.JS</external-link
+                >
               </span>
 
               <ul class="features">
-                <li class="yes" title="this plugin provides highlighting for glimmer"></li>
+                <li
+                  class="yes"
+                  title="this plugin provides highlighting for glimmer"
+                ></li>
               </ul>
               <ul class="features">
-                <li class="yes">supports <code>hbs``</code> template literals in JS & TS</li>
-                <li class="yes">supports <code>&lt;template&gt</code> tags in JS & TS</li>
-                <li class="yes">does not support <code>hbs</code> tags in Markdown</li>
+                <li class="yes">
+                  supports <code>hbs``</code> template literals in JS & TS
+                </li>
+                <li class="yes">
+                  supports <code>&lt;template&gt</code> tags in JS & TS
+                </li>
+                <li class="yes">
+                  does not support <code>hbs</code> tags in Markdown
+                </li>
               </ul>
             </div>
           </div>
 
           <div class="plugin-info">
-            <external-link href="https://prismjs-glimmer.nullvoxpopuli.com">prismjs-glimmer</external-link>
+            <external-link href="https://prismjs-glimmer.nullvoxpopuli.com"
+              >prismjs-glimmer</external-link
+            >
 
             <div class="plugin">
               <span>
                 third-party plugin for
-                <external-link href="https://github.com/PrismJS/prism">PrismJS</external-link>
+                <external-link href="https://github.com/PrismJS/prism"
+                  >PrismJS</external-link
+                >
               </span>
 
               <ul class="features">
-                <li class="yes" title="this plugin provides highlighting for glimmer"></li>
+                <li
+                  class="yes"
+                  title="this plugin provides highlighting for glimmer"
+                ></li>
               </ul>
               <ul class="features">
-                <li class="no">does not support <code>hbs``</code> template literals</li>
-                <li class="no">does not support <code>&lt;template&gt</code> tags</li>
-                <li class="no">does not support <code>hbs</code> tags in Markdown</li>
+                <li class="no">
+                  does not support <code>hbs``</code> template literals
+                </li>
+                <li class="no">
+                  does not support <code>&lt;template&gt</code> tags
+                </li>
+                <li class="no">
+                  does not support <code>hbs</code> tags in Markdown
+                </li>
               </ul>
             </div>
           </div>
+        </section>
+      </article>
+    </main>
 
-      </section>
-    </article>
-  </main>
+    <footer>
+      <external-link
+        id="edit"
+        href="https://github.com/NullVoxPopuli/glimmer/edit/main/index.html"
+      >
+        edit this page
+      </external-link>
+    </footer>
 
-  <footer>
-    <external-link id="edit" href="https://github.com/NullVoxPopuli/glimmer/edit/main/index.html">
-      edit this page
-    </external-link>
-  </footer>
+    <script type="module">
+      /**
+       *  LitElement only uses shadow dom, which doesn't work with keyboard focus...
+       *  you can disable shadow-dom, but then you don't get slots / children...
+       *
+       *  Native Custom elements are a giant pain -- esp w/r/t lifecycle.
+       *  - when connectedCallback is invoked, the component isn't rendered yet
+       *  - there is no way to have outer-HTML semantics, such as with Glimmer, React, etc
+       *  - It seems the way to use native custom elements in this way is via the "is" property
+       *  - this problem comes from how CustomElements can't *replace* themselves during render like
+       *    frameworks can
+       *
+       *  LitHTML, on the other hand, is a fancy string builder that happens to have syntax highlighting.
+       *           so... I'll use that.
+       *
+       *  There are tons of browser compatibility issues with Custom elements
+       *  - Firefox supports extending from HTMLAnchorElement but Chrome only allows extending from HTMLElement
+       *  - Chrome doesn't support { extends: 'element-tag' }
+       *
+       *
+       *  Custom elements flash when rendering...
+       *   not good for users
+       *   - known as "FOUC" or "Flash of unstyled content"
+       *   - https://github.com/axa-ch/patterns-library/issues/365
+       *     they're answer is to use "Skeleton views / loaders"... wat
+       *   - this partially has to do with modules blocking script execution
+       *     and why this script tag has moved to the bottom of the body -- so that
+       *     the page can finish rendering first
+       */
+      // import { html } from "https://unpkg.com/lit-element/lit-element.js?module";
+      // Using a local import is *much* faster than pulling from a CDN, at least for development
+      // Importing from the relative path appears to not work on github-pages
+      // import { html, render } from './node_modules/lit-html/lit-html.js';
+      import { html, render } from "https://esm.sh/lit-html/lit-html.js?module";
+      import { unsafeHTML } from "https://esm.sh/lit-html/directives/unsafe-html.js?module";
 
-  <script type="module">
-    /**
-     *  LitElement only uses shadow dom, which doesn't work with keyboard focus...
-     *  you can disable shadow-dom, but then you don't get slots / children...
-     *
-     *  Native Custom elements are a giant pain -- esp w/r/t lifecycle.
-     *  - when connectedCallback is invoked, the component isn't rendered yet
-     *  - there is no way to have outer-HTML semantics, such as with Glimmer, React, etc
-     *  - It seems the way to use native custom elements in this way is via the "is" property
-     *  - this problem comes from how CustomElements can't *replace* themselves during render like
-     *    frameworks can
-     *
-     *  LitHTML, on the other hand, is a fancy string builder that happens to have syntax highlighting.
-     *           so... I'll use that.
-     *
-     *  There are tons of browser compatibility issues with Custom elements
-     *  - Firefox supports extending from HTMLAnchorElement but Chrome only allows extending from HTMLElement
-     *  - Chrome doesn't support { extends: 'element-tag' }
-     *
-     *
-     *  Custom elements flash when rendering...
-     *   not good for users
-     *   - known as "FOUC" or "Flash of unstyled content"
-     *   - https://github.com/axa-ch/patterns-library/issues/365
-     *     they're answer is to use "Skeleton views / loaders"... wat
-     *   - this partially has to do with modules blocking script execution
-     *     and why this script tag has moved to the bottom of the body -- so that
-     *     the page can finish rendering first
-     */
-    // import { html } from "https://unpkg.com/lit-element/lit-element.js?module";
-    // Using a local import is *much* faster than pulling from a CDN, at least for development
-    // Importing from the relative path appears to not work on github-pages
-    // import { html, render } from './node_modules/lit-html/lit-html.js';
-    import { html, render } from 'https://unpkg.com/lit-html/lit-html.js?module';
-    import { unsafeHTML } from 'https://unpkg.com/lit-html/directives/unsafe-html.js?module';
+      customElements.define(
+        "external-link",
+        class ExternalLink extends HTMLElement {
+          constructor() {
+            super();
 
-    customElements.define(
-      'external-link',
-      class ExternalLink extends HTMLElement {
-        constructor() {
-          super();
+            let href = this.getAttribute("href");
+            let template = html`
+              <a href="${href}" target="_blank" rel="noreferrer noopener">
+                ${unsafeHTML(this.innerHTML)}
+              </a>
+            `;
 
-          let href = this.getAttribute('href');
-          let template = html`
-            <a href="${href}" target="_blank" rel="noreferrer noopener">
-              ${unsafeHTML(this.innerHTML)}
-            </a>
-          `;
-
-          render(template, this);
+            render(template, this);
+          }
         }
-      }
-    );
+      );
 
-    customElements.define(
-      'heading-link',
-      class HeadingLink extends HTMLElement {
-        constructor() {
-          super();
+      customElements.define(
+        "heading-link",
+        class HeadingLink extends HTMLElement {
+          constructor() {
+            super();
 
-          let name = this.getAttribute('name');
-          let template = html`<a class="heading-link" name=${name} href="#${name}"> ${name} </a> `;
+            let name = this.getAttribute("name");
+            let template = html`<a
+              class="heading-link"
+              name=${name}
+              href="#${name}"
+            >
+              ${name}
+            </a> `;
 
-          render(template, this);
+            render(template, this);
+          }
         }
+      );
+
+      function removeLoader() {
+        let loader = document.getElementById("loader");
+        let duration = getComputedStyle(loader).transitionDuration;
+
+        let seconds = duration.replaceAll(/[^.\d]+/g, "");
+        let milliseconds = parseFloat(seconds, 10) * 1000;
+
+        loader.style.opacity = 0;
+
+        setTimeout(() => {
+          loader.parentElement.removeChild(loader);
+        }, milliseconds);
       }
-    );
 
-    function removeLoader() {
-      let loader = document.getElementById('loader');
-      let duration = getComputedStyle(loader).transitionDuration;
-
-      let seconds = duration.replaceAll(/[^.\d]+/g, '');
-      let milliseconds = parseFloat(seconds, 10) * 1000;
-
-      loader.style.opacity = 0;
-
-      setTimeout(() => {
-        loader.parentElement.removeChild(loader);
-      }, milliseconds);
-    }
-
-    removeLoader();
-  </script>
-
-</body>
-
+      removeLoader();
+    </script>
+  </body>
 </html>

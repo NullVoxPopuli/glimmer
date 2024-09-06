@@ -10,8 +10,9 @@
     "lint:js": "eslint ."
   },
   "volta": {
-    "node": "14.16.1",
-    "npm": "7.11.1"
+    "node": "22.8.0",
+    "npm": "7.11.1",
+    "pnpm": "9.9.0"
   },
   "devDependencies": {
     "@nullvoxpopuli/eslint-configs": "^1.2.5",
