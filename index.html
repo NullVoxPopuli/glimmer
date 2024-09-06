@@ -331,28 +331,26 @@
         <h2><heading-link name="Playground / Demo / Reproductions" /></h2>
 
         <dl>
-          <dt>
-            <external-link
-              href="https://glimmerjs.github.io/glimmer-experimental/"
-            >
-              GlimmerX Playground
-            </external-link>
-          </dt>
-          <dd>
-            The official app from the folks working on and experimenting with
-            the future of Glimmer
-          </dd>
-
-          <dt>
-            <external-link
-              href="https://stackblitz.com/github/ember-cli/ember-new-output"
-            >
-              `ember new` app output on StackBlitz
-            </external-link>
-          </dt>
+          <dt>StackBlitz</dt>
           <dd>
             Always up to date ember playground that uses the real ember-cli in a
             WebContainer.
+            <ul>
+              <li>
+                <external-link
+                  href="https://stackblitz.com/fork/github/ember-cli/editor-output/tree/stackblitz-app-output?title=Ember%20Starter"
+                >
+                  `ember new` app (JS)
+                </external-link>
+              </li>
+              <li>
+                <external-link
+                  href="https://stackblitz.com/fork/github/ember-cli/editor-output/tree/stackblitz-app-output-typescript?title=Ember%20TypeScript%20Starter"
+                >
+                  `ember new` app (TS)
+                </external-link>
+              </li>
+            </ul>
           </dd>
 
           <dt>
@@ -365,6 +363,11 @@
             authoring live documentation. <br />
             Related projects:
             <ul>
+              <li>
+                <external-link href="https://kolay.nullvoxpopuli.com/">
+                  Kolay
+                </external-link>
+              </li>
               <li>
                 <external-link href="https://field-guide.netlify.app/">
                   field-guide
@@ -493,8 +496,8 @@
             <h4><heading-link name="(neo)vim" /></h4>
 
             <p class="summary">
-              (neo)vim has a couple alternatives to highlighting, but requires
-              some configuration to get the maximum support
+              (neo)vim has tree-sitter support built in, so it's recommended to
+              use tree-sitter grammars to get the maximum support
             </p>
 
             <header class="plugin">
@@ -504,6 +507,56 @@
               <span>basic highlighting</span>
               <span>embedded support</span>
             </header>
+
+            <div class="plugin-info">
+              <external-link
+                href="https://github.com/ember-tooling/tree-sitter-glimmer"
+              >
+                tree-sitter-glimmer
+              </external-link>
+              <external-link
+                href="https://github.com/NullVoxPopuli/tree-sitter-glimmer-javascript"
+              >
+                tree-sitter-glimmer-javascript
+              </external-link>
+              <external-link
+                href="https://github.com/NullVoxPopuli/tree-sitter-glimmer-typescript"
+              >
+                tree-sitter-glimmer-typescript
+              </external-link>
+
+              <div class="plugin">
+                <span>
+                  <em>for neovim only</em> -- provides high-fidelity syntax
+                  highlighting.<br />
+                  can be used instead of vim-ember-hbs
+                </span>
+
+                <ul class="features">
+                  <li
+                    class="yes"
+                    title="this plugin provides highlighting for glimmer"
+                  >
+                    requires
+                    <external-link
+                      href="https://github.com/nvim-treesitter/nvim-treesitter"
+                      >nvim-treesitter</external-link
+                    >
+                  </li>
+                </ul>
+                <ul class="features">
+                  <li class="yes">
+                    supports <code>hbs``</code> template literals in JS & TS
+                  </li>
+                  <li class="yes">
+                    supports <code>&lt;template&gt</code> tags in JS & TS
+                  </li>
+                  <li class="yes">
+                    does not support <code>hbs</code> tags in Markdown
+                  </li>
+                </ul>
+              </div>
+            </div>
             <div class="plugin-info">
               <external-link
                 href="https://github.com/NullVoxPopuli/vim-ember-hbs"
@@ -534,58 +587,6 @@
                   ></li>
                 </ul>
               </div>
-            </div>
-
-            <div class="plugin-info">
-              <external-link
-                href="https://github.com/alexlafroscia/tree-sitter-glimmer"
-              >
-                tree-sitter-glimmer
-              </external-link>
-
-              <div class="plugin">
-                <span>
-                  <em>for neovim only</em> -- provides high-fidelity syntax
-                  highlighting.<br />
-                  can be used instead of vim-ember-hbs
-                </span>
-
-                <ul class="features">
-                  <li
-                    class="yes"
-                    title="this plugin provides highlighting for glimmer"
-                  >
-                    requires
-                    <external-link
-                      href="https://github.com/nvim-treesitter/nvim-treesitter"
-                      >nvim-treesitter</external-link
-                    >
-                  </li>
-                </ul>
-                <ul class="features">
-                  <li class="yes">
-                    supports <code>hbs``</code> template literals in JS & TS
-                  </li>
-                  <li class="yes">
-                    supports <code>&lt;template&gt</code> tags in JS & TS
-                  </li>
-                  <li class="no">
-                    does not support <code>hbs</code> tags in Markdown
-                  </li>
-                </ul>
-              </div>
-
-              <span>
-                If you wish to use <em>vim-ember-hbs</em>, to get embedded
-                support, you'll need to:</span
-              >
-              <pre><code>Plug 'NullVoxPopuli/vim-ember-hbs'
-  Plug 'Quramy/vim-js-pretty-template'
-  Plug 'plasticboy/vim-markdown'
-
-  let g:vim_markdown_fenced_languages = ['js=javascript', 'ts=typescript', 'hbs=handlebars']
-
-  call jspretmpl#register_tag('hbs', 'handlebars')</code></pre>
             </div>
           </section>
         </section>
@@ -735,7 +736,9 @@
               </a>
             `;
 
-            render(template, this);
+            render(template, this, {
+              eventContext: this,
+            });
           }
         }
       );
