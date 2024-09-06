@@ -8,6 +8,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="shortcut icon" href="https://emberjs.com/images/favicon.png" />
 
+    <link rel="modulepreload" href="https://esm.sh/lit-html" />
+    <link
+      rel="modulepreload"
+      href="https://esm.sh/lit-html/directives/unsafe-html.js"
+    />
     <!--
       This the source of truth for the ember brand variables
         https://emberjs.com/images/brand/Ember-Brand-Guidelines.pdf
@@ -240,7 +245,7 @@
 
       #loader {
         opacity: 1;
-        transition: opacity 100ms linear;
+        transition: opacity 50ms linear;
 
         position: fixed;
         top: 0;
@@ -714,8 +719,8 @@
       // Using a local import is *much* faster than pulling from a CDN, at least for development
       // Importing from the relative path appears to not work on github-pages
       // import { html, render } from './node_modules/lit-html/lit-html.js';
-      import { html, render } from "https://esm.sh/lit-html/lit-html.js?module";
-      import { unsafeHTML } from "https://esm.sh/lit-html/directives/unsafe-html.js?module";
+      import { html, render } from "https://esm.sh/lit-html";
+      import { unsafeHTML } from "https://esm.sh/lit-html/directives/unsafe-html.js";
 
       customElements.define(
         "external-link",
